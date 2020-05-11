@@ -9,3 +9,9 @@ def index(request):
         "none": 1
     }
     return render(request, "appsite/index.html", context)
+
+def sig_in(request):
+    context = {
+        "none": 1
+    }
+    return render(request, "appsite/modules_sign_in.html", context)
