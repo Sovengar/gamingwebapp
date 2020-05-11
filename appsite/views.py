@@ -15,3 +15,9 @@ def sig_in(request):
         "none": 1
     }
     return render(request, "appsite/modules_sign_in.html", context)
+
+def sig_up(request):
+    context = {
+        "none": 1
+    }
+    return render(request, "appsite/modules_sign_up.html", context)
