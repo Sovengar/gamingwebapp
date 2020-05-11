@@ -1,5 +1,6 @@
 # WEBAPP WITH PYTHON
 
+## Stack
 ```sh
 Backend: Django con python
 Frontend: HTML5, CSS3, ES6, MDB4
