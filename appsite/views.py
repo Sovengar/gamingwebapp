@@ -6,12 +6,10 @@ from django.contrib.auth import logout, login, authenticate
 # Create your views here.
 
 def index_view(request):
-    if not request.user.is_authenticated:
-        return render(request, "appsite/login.html", {"message": None})
     context = {
         "user": request.user
     }
-    return render(request, "appsite/user.html", context)
+    return render(request, "appsite/index.html", context)
 
 def register_view(request):
     context = {
@@ -32,3 +30,11 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return render(request, "appsite/login.html", {"message": "Logged out."})
+
+def private_view(request):
+    if not request.user.is_authenticated:
+        return render(request, "appsite/login.html", {"message": None})
+    context = {
+        "user": request.user
+    }
+    return render(request, "appsite/private.html", context)
