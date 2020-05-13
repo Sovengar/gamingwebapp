@@ -79,9 +79,9 @@
                       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"><span class="d-none d-xl-inline-block ml-1">{{ user.username }}</span></a>
                       <div class="dropdown-menu dropdown-primary dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <!-- 
+                        
+                        -->
                       </div>
                     </li>
                   {% else %}
@@ -105,6 +105,12 @@
     
         </nav>
         <!--/.Navbar-->
+
+        {% if messages %}
+          {% for message in messages %}
+             <div class=”alert alert-{{ message.tags }}“>{{ message }}</div>
+          {%  endfor %} 
+        {% endif %}
 
     {% block body %}{% endblock %}
 

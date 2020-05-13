@@ -32,6 +32,8 @@ ALLOWED_HOSTS = ['gamingwebapp.herokuapp.com']
 
 INSTALLED_APPS = [
     'appsite.apps.AppsiteConfig',
+    'users.apps.UsersConfig',
+    'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -121,5 +123,6 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 django_heroku.settings(locals())
