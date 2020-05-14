@@ -1,5 +1,6 @@
 {% extends "appsite/base.html" %}
 {% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block title %}
     Gaming webapp
@@ -7,45 +8,61 @@
 
 {% block body %}
 
-
-<div>
-  <form method="POST">
-    {% csrf_token %}
-    <fieldset>
-      <legend> Join today</legend>
-      {{ form|crispy }}
-    </fieldset>
-    <button type="submit">Sign Up</button>
-  </form>
-  <p>Already have an account? <a href="#">Sign In</a></p>
-</div>
-
-
-
 <div class="container my-5 py-5 z-depth-1">
-
-
     <!--Section: Content-->
     <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
- 
-
       <!--Grid row-->
       <div class="row d-flex justify-content-center">
-
         <!--Grid column-->
         <div class="col-md-6">
 
-          <!-- Default form login -->
-          <form class="text-center" action="#!">
+          <!-- Default form register -->
+          <form class="text-center" method="POST">
+            <p class="h4 mb-4">Sign Up</p>
 
-            <p class="h4 mb-4">Sign in</p>
+            {% csrf_token %}
 
-            <!-- Email -->
-            <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
- 
-            <!-- Password -->
-            <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+            {% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+          {% endfor %}
 
+          {% if form.non_field_errors %}
+            <div class="alert alert-danger" role="alert">
+              {% for error in form.non_field_errors %}
+                {{ error }}
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          {% for field in form.visible_fields %}
+            <div class="form-group">
+              {{ field.label_tag }}
+
+              {% if form.is_bound %}
+                {% if field.errors %}
+                  {% render_field field class="form-control is-invalid" %}
+                  {% for error in field.errors %}
+                    <div class="invalid-feedback">
+                      {{ error }}
+                    </div>
+                  {% endfor %}
+                {% else %}
+                  {% render_field field class="form-control is-valid" %}
+                {% endif %}
+              {% else %}
+                {% render_field field class="form-control" %}
+              {% endif %}
+
+              {% if field.help_text %}
+                <small class="form-text text-muted">{{ field.help_text }}</small>
+              {% endif %}
+            </div>
+          {% endfor %}
+
+
+
+            <!-- Email <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail"> -->
+            <!-- Password <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password"> -->
             <div class="d-flex justify-content-around">
               <div>
                 <!-- Remember me -->
@@ -54,41 +71,21 @@
                   <label class="custom-control-label" for="defaultLoginFormRemember">Remember me</label>
                 </div>
               </div>
-              <div>
-                <!-- Forgot password -->
-                <a href="">Forgot password?</a>
-              </div>
             </div>
-
-            <!-- Sign in button -->
-            <button class="btn btn-info btn-block my-4" type="submit">Sign in</button>
-
-            <!-- Register -->
-            <p>Not a member?
-              <a href="">Register</a>
+            <!-- Sign up button -->
+            <button class="btn btn-info btn-block my-4" type="submit">Sign Up</button>
+            <!-- Login -->
+            <p>Already have an account?
+              <a href="">Sign in</a>
             </p>
-
-            <!-- Social login -->
-            <p>or sign in with:</p>
-
-                <a href="#" class="mx-1" role="button"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="mx-1" role="button"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="mx-1" role="button"><i class="fab fa-linkedin-in"></i></a>
-                <a href="#" class="mx-1" role="button"><i class="fab fa-github"></i></a>
-
           </form>
           <!-- Default form login -->
 
         </div>
         <!--Grid column-->
-
       </div>
       <!--Grid row-->
-
-
     </section>
     <!--Section: Content-->
-
-
   </div>
 {% endblock %}
