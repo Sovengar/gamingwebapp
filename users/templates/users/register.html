@@ -1,6 +1,4 @@
 {% extends "appsite/base.html" %}
-{% load crispy_forms_tags %}
-{% load widget_tweaks %}
 
 {% block title %}
     Gaming webapp
@@ -21,45 +19,7 @@
             <p class="h4 mb-4">Sign Up</p>
 
             {% csrf_token %}
-
-            {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field }}
-          {% endfor %}
-
-          {% if form.non_field_errors %}
-            <div class="alert alert-danger" role="alert">
-              {% for error in form.non_field_errors %}
-                {{ error }}
-              {% endfor %}
-            </div>
-          {% endif %}
-
-          {% for field in form.visible_fields %}
-            <div class="form-group">
-              {{ field.label_tag }}
-
-              {% if form.is_bound %}
-                {% if field.errors %}
-                  {% render_field field class="form-control is-invalid" %}
-                  {% for error in field.errors %}
-                    <div class="invalid-feedback">
-                      {{ error }}
-                    </div>
-                  {% endfor %}
-                {% else %}
-                  {% render_field field class="form-control is-valid" %}
-                {% endif %}
-              {% else %}
-                {% render_field field class="form-control" %}
-              {% endif %}
-
-              {% if field.help_text %}
-                <small class="form-text text-muted">{{ field.help_text }}</small>
-              {% endif %}
-            </div>
-          {% endfor %}
-
-
+            {% include 'includes/styled_form.html' with form=form %}
 
             <!-- Email <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail"> -->
             <!-- Password <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password"> -->
@@ -76,7 +36,7 @@
             <button class="btn btn-info btn-block my-4" type="submit">Sign Up</button>
             <!-- Login -->
             <p>Already have an account?
-              <a href="">Sign in</a>
+              <a href="{% url 'login' %}">Sign In</a>
             </p>
           </form>
           <!-- Default form login -->

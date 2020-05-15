@@ -126,4 +126,8 @@ STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+LOGIN_REDIRECT_URL = 'appsite-index'
+LOGOUT_REDIRECT_URL = 'appsite-index'
+LOGIN_URL = 'login'
+
 django_heroku.settings(locals())

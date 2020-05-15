@@ -1,9 +1,11 @@
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib.auth import logout, login, authenticate
 from django.contrib import messages
+from django.contrib.auth import logout, login, authenticate
+from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm
+
 
 # Create your views here.
 
@@ -21,7 +23,7 @@ def register_view(request):
             # Shows a 1 time flash on the template
             messages.success(request, f'Account created for {username}!')
             # redirect to a new URL:
-            return redirect('appsite-index')
+            return redirect('login')
     # if a GET (or any other method) we'll create a blank form
     # This is what we get when we access to the route by navigating/typing
     else:
@@ -35,6 +37,11 @@ def register_view(request):
 
     return render(request, "users/register.html", context)
 
+@login_required
+def profile_view(request):
+    return render(request, 'users/profile.html')
+
+"""
 def login_view(request):
         username = request.POST["username"]
         password = request.POST["password"]
@@ -48,3 +55,5 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return render(request, "appsite/login.html", {"message": "Logged out."})
+"""
+
