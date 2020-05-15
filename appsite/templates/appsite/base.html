@@ -32,13 +32,13 @@
   </head>
   <body>
 
-    {% if messages %}
-          {% for message in messages %}
-             <div class=”alert alert-{{ message.tags }}“>{{ message }}</div>
-          {%  endfor %} 
-        {% endif %}
-
     {% include 'includes/navbar.html' %}
+
+    {% if messages %}
+      {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+      {%  endfor %} 
+    {% endif %}
 
     {% block body %}{% endblock %}
 

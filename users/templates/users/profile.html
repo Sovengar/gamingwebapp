@@ -1,9 +1,58 @@
 {% extends "appsite/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
 
 {% block title %}
     Gaming webapp
 {% endblock %}
 
 {% block body %}
-    <h1>{{ user.username }}</h1>
+  <div class="container pt-5 my-5 z-depth-1">
+    <section class="p-md-3 mx-md-5 text-center text-lg-left">
+      <div class="row">
+        <div class="col-lg-4 mb-4">
+          <div class="p-4">
+            <div class="avatar w-100 white d-flex justify-content-center align-items-center">
+              <img
+                src="{{ user.profile.image.url }}"
+                class="img-fluid rounded-circle z-depth-1"
+              />
+            </div>
+            <div class="text-center mt-3">
+              <h6 class="font-weight-bold pt-2">{{ user.username }}</h6>
+              <p class="text-muted">
+                <small><i>{{ user.email }}</i></small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- FORM HERE -->
+        <!--Grid row-->
+        <div class="row d-flex justify-content-left">
+          <!--Grid column-->
+          <div class="col-md-6">
+            <form class="text-left" method="POST" enctype="multipart/form-data">
+              <p class="h4 mb-4">Profile Info</p>
+              {% csrf_token %}
+              {{ u_form|crispy }}
+              {{ p_form|crispy }}
+              <hr>
+              <div>
+                <!-- Forgot password -->
+                <a href="{% url 'password_reset' %}">Forgot password?</a>
+              </div>
+              <button class="btn btn-info btn-block my-4" type="submit">Update</button>
+            </form>
+          </div>
+          <!--Grid column-->
+        </div>
+        <!--Grid row-->
+    
+
+
+  </div>
 {% endblock %}
+
+
