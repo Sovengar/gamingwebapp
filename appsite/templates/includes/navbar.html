@@ -1,24 +1,64 @@
-<nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar fixed-top">
-    <a class="navbar-brand" href="#">i class="fab fa-3x fa-mdb"></i></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-dark scrolling-navbar fixed-top py-0">
   
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
+      <a class="navbar-brand" href="{% url 'appsite-index' %}">
+        <img style="width: 10vh;" class="img-fluid rounded-circle" src="{% static 'appsite/img/logo.png' %}" alt="logo">
+      </a>
+    
+    
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'appsite-index' %}">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">News</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">FAQ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav nav-flex-icons ml-auto">
+      <li class="nav-item">
+      <a href="" class="nav-link waves-effect">
+          <span class="badge red z-depth-3 mr-1">2</span>
+          <i id="navbar-static-cart" alt="Cart" class="fas fa-shopping-cart fa-2x"></i>
+          <span class="sr-only">Cart</span>
+      </a>
+      </li>
+
+      {% if user.is_authenticated %}
+          <li class="nav-item avatar dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="avatar image">
+              </a>
+              <div class="dropdown-menu dropdown-menu-lg-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink-55">
+                <a href="" class="mx-0 my-0 py-1">{{ user.username }}</a>
+                <hr class="mx-0 my-0 py-0"/>
+                <a class="dropdown-item mx-0 my-0 py-1" href="{% url 'profile' %}">Profile</a>
+                <hr class="mx-0 my-0 py-0"/>
+                <a class="dropdown-item mx-0 my-0 py-1" href="{% url 'logout' %}">Logout</a>
+              </div>
+          </li>
+      {% else %}
+          <li class="nav-item">
+          <a href="{% url 'login' %}" class="nav-link waves-effect">
+              <span class="d-none d-xl-inline-block ml-1">Sign In</span>
+          </a>
+          </li>
+          <li class="nav-item">
+          <a href="{% url 'register' %}" class="nav-link waves-effect">
+              <span class="d-none d-xl-inline-block ml-1">Sign Up</span>
+          </a>
+          </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

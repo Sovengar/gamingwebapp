@@ -20,11 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '9$**_c%z22nnaujbag^%ktn_#+c!&d_eban+z$7mxg@jx%be3='
-SECRET_KEY = os.environ.get('SECRET_KEY')
+#SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '9$**_c%z22nnaujbag^%ktn_#+c!&d_eban+z$7mxg@jx%be3='
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+#DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
+DEBUG = True
 
 
 ALLOWED_HOSTS = ['gamingwebapp.herokuapp.com']
@@ -127,6 +128,11 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+
+]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 

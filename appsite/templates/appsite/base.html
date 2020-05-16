@@ -34,13 +34,37 @@
 
     {% include 'includes/navbar.html' %}
 
-    {% if messages %}
-      {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
-      {%  endfor %} 
-    {% endif %}
+    <!--<div class="container" style="background-image: url({% static "appsite/background.png" %});">-->
+      <div class="view" style="background-image: url('{% static 'appsite/img/background.png' %}')">
+        <!-- Mask & flexbox options-->
+        <div class="mask rgba-gradient align-items-center">
+          <!-- Content -->
+          <div class="container">
+            <!--Grid row-->
+            <div class="row mt-5">
 
-    {% block body %}{% endblock %}
+              <div class="mt-5"></div>
+              
+              {% if messages %}
+                {% for message in messages %}
+                  <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+                {%  endfor %} 
+              {% endif %}
+            
+              {% block body %}{% endblock %}
+              
+            </div>
+            <!--Grid row-->
+          </div>
+          <!-- Content -->
+        </div>
+        <!-- Mask & flexbox options-->
+      </div>
+      <!-- Full Page Intro -->
+    </header>
+    <!-- Main navigation -->
+    <!-- Main Layout-->
+    
 
     {% include 'includes/footer.html' %}
 
