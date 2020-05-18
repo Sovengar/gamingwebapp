@@ -1,13 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
-import os
 
 # Create your models here.
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    image = models.ImageField()
     avatar = models.ImageField(default='default_avatar.jpg', upload_to='profile_pics')
 
     def __str__(self):
@@ -27,4 +26,4 @@ class Profile(models.Model):
 
         #Avatar photo
         img.thumbnail(size_40)
-        img.save(self.avatar.path)  
+        img.save(self.avatar.path)
