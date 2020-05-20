@@ -27,7 +27,6 @@ SECRET_KEY = '9$**_c%z22nnaujbag^%ktn_#+c!&d_eban+z$7mxg@jx%be3='
 #DEBUG = (os.environ.get('DEBUG_VALUE') == 'True')
 DEBUG = True
 
-
 ALLOWED_HOSTS = ['gamingwebapp.herokuapp.com']
 
 # Application definition
@@ -82,15 +81,15 @@ WSGI_APPLICATION = 'gamingwebapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-"""
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-"""
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -101,6 +100,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+"""
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -139,7 +139,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
