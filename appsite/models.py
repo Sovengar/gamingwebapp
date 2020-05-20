@@ -7,7 +7,7 @@ from PIL import Image
 
 class Article(models.Model):
     name = models.CharField(max_length=50)
-    desc = models.CharField(max_length=50)
+    desc = models.CharField(max_length=500)
     price = models.IntegerField(null=False)
     image = models.ImageField(default='default.jpg', upload_to='article_pics')
     stock = models.IntegerField(default=1)
