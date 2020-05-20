@@ -55,8 +55,8 @@ h6 {
 line-height: 1.7;
 }
 
-.view {
-    background-repeat: no-repeat; 
+body {
+    background-repeat: repeat-y;
     background-size: cover; 
     background-position: center center;
 }

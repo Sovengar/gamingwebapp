@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['gamingwebapp.herokuapp.com']
 INSTALLED_APPS = [
     'appsite.apps.AppsiteConfig',
     'users.apps.UsersConfig',
+    'blog.apps.BlogConfig',
     'crispy_forms',
     'widget_tweaks',
     'django.contrib.admin',

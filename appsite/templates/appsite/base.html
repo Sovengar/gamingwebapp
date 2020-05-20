@@ -30,41 +30,33 @@
     <!-- Your custom styles (optional) -->
     <link rel="stylesheet" href="{% static 'appsite/css/style.css' %}" />
   </head>
-  <body>
-
+  <body class="elegant-color white-text">
+    
     {% include 'includes/navbar.html' %}
 
     <!--<div class="container" style="background-image: url({% static "appsite/background.png" %});">-->
-      <div class="view" style="background-image: url('{% static 'appsite/img/background.png' %}')">
+      <!--<div class="view" style="background-image: url('{% static 'appsite/img/background.png' %}')"></div>-->
         <!-- Mask & flexbox options-->
         <div class="mask rgba-gradient align-items-center">
           <!-- Content -->
-          <div class="container">
-            <!--Grid row-->
-            <div class="row mt-5">
-
-              <div class="mt-5"></div>
-              
-              {% if messages %}
-                {% for message in messages %}
-                  <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
-                {%  endfor %} 
-              {% endif %}
+          <div style="min-height: 100vh;" class="container animated fadeIn">
             
-              {% block body %}{% endblock %}
-              
-            </div>
-            <!--Grid row-->
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
+              {%  endfor %} 
+            {% endif %}
+        
+            {% block body %}{% endblock %}
+
           </div>
           <!-- Content -->
         </div>
         <!-- Mask & flexbox options-->
-      </div>
+     
       <!-- Full Page Intro -->
-    </header>
     <!-- Main navigation -->
     <!-- Main Layout-->
-    
 
     {% include 'includes/footer.html' %}
 

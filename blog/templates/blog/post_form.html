@@ -1,0 +1,62 @@
+{% extends "appsite/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Gaming webapp
+{% endblock %}
+
+{% block body %}
+<div class="pt-5">
+  <!--Grid column-->
+  <div class="container col-md-6 col-xl-5 mb-4 pt-5">
+    <!--Form-->
+    <div class="card wow fadeInRight" data-wow-delay="0.3s">
+      <div class="card-body">
+        <!--Header-->
+        <div class="text-center">
+          <h3 class="white-text">
+            <i class="fas fa-user white-text"></i> Blog Post</h3>
+          <hr class="hr-light">
+        </div>
+
+        {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+        {% endfor %}
+        
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+          {% for error in form.non_field_errors %}
+            {{ error }}
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <form class="md-form" method="POST">
+          
+            {% csrf_token %}
+            <!--Body-->
+            <div class="md-form">
+                
+                    {% render_field form.title class="form-control white-text" %}
+                <label for="form3" class="active">Title</label>
+              </div>
+
+            <div class="md-form">
+                <label for="form3" class="active mb-0 pt-0">Content</label>
+                  {% render_field form.content class="form-control white-text pt-2" %}
+                  
+            </div>
+
+            <div class="text-center mt-4">
+              <button class="btn btn-info btn-indigo" type="submit">Post</button>
+            </div>
+        </form>
+        <!-- Default form login -->
+      </div>
+    </div>
+    <!--/.Form-->
+  </div>
+  <!--Grid column-->
+</div>
+{% endblock %}
