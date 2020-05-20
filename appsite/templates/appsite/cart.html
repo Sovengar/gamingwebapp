@@ -1,0 +1,46 @@
+{% extends "appsite/base.html" %}
+{% load static %}
+
+{% block title %}
+    Gaming webapp
+{% endblock %}
+
+{% block body %}  
+<div class="container pt-5 mt-5">
+  <!--Section: Content-->
+  <section class="dark-grey-text text-center">
+    
+    <!-- Section heading -->
+    <a class="btn btn-primary mt-1 mb-5" href="">Buy</a>
+    <!-- Section description -->
+    
+    <!-- Grid row -->
+    <div class="row">
+      {% for article in articles %}
+            <!-- Grid column -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <!-- Collection card -->
+          <div class="card rounded collection-card z-depth-1-half">
+            <!-- Card image -->
+            <a class="mr-2" href="{% url 'appsite-article_detail' article.id %}">
+              <img style="height:30vh;" class="card-img-top rounded pl-2 pt-2" src="{{ article.image.url }}" alt="Card image cap">
+            </a>
+            <!-- Card content -->
+            <div class="card-body pb-0">
+              <!-- Title -->
+              <p class="card-title text-muted text-uppercase font-small mt-1 white-text">{{ article.name }}</p>
+              <!-- Text -->
+              <p class="mb-2 white-text">{{ article.price }} €</p>
+            </div>
+            <a class="btn btn-danger btn-sm mt-1 mb-2" href="{% url 'update_cart' article.id %}">Delete</a>
+          </div>
+          <!-- Collection card -->
+        </div>
+        <!-- Grid column --> 
+      {% endfor %}
+    </div>
+    <!-- Grid row -->
+  </section>
+  <!--Section: Content-->
+</div>
+{% endblock %}

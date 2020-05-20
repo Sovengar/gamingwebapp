@@ -12,6 +12,7 @@ class Article(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='article_pics')
     stock = models.IntegerField(default=1)
     release_date = models.DateTimeField(default=timezone.now)
+    new_article = models.BooleanField(default=True)
 
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

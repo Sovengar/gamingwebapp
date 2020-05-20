@@ -1,8 +1,10 @@
 from django.urls import path
 from . import views
+from .views import ArticleListView, ArticleDetailView
 
 urlpatterns = [
-    path("", views.index_view, name="appsite-index"),
-    path("private/", views.private_view, name="appsite-private")
+    path('', ArticleListView.as_view(), name="appsite-index"),
+    path('post/<int:pk>/', ArticleDetailView.as_view(), name='appsite-article_detail'),
+
 ]
 

@@ -5,15 +5,66 @@
     Gaming webapp
 {% endblock %}
 
-{% block body %}
+{% block body %}  
+<div class="container pt-5 mt-5 pb-5">
+  <!--Section: Content-->
+  <section class="dark-grey-text text-center">
     
-    <!-- Start your project here-->  
-    <div style="height: 100vh">
-      <div class="flex-center flex-column">
-        <h1 class="text-hide animated fadeIn mb-4" style="background-image: url('https://mdbootstrap.com/img/logo/mdb-transparent-250px.png'); width: 250px; height: 90px;">MDBootstrap</h1>
-        <h5 class="animated fadeIn mb-3">Thank you for using our product. We're glad you're with us.</h5>
-        <p class="animated fadeIn text-muted">MDB Team</p>
-      </div>
+    <!-- Section heading -->
+    <h3 class="font-weight-bold mb-4 pb-2">New releases</h3>
+    <!-- Section description -->
+    
+    <!-- Grid row -->
+    <div class="row">
+      {% for article in articles %}
+        {% if article.new_article == True %}
+            <!-- Grid column -->
+        <div class="col-lg-3 col-md-6 mb-4">
+          <!-- Collection card -->
+          <div class="card rounded collection-card z-depth-1-half">
+            <!-- Card image -->
+            <a class="mr-2" href="{% url 'appsite-article_detail' article.id %}">
+              <img style="height:30vh;" class="card-img-top rounded pl-2 pt-2" src="{{ article.image.url }}" alt="Card image cap">
+            </a>
+            <!-- Card content -->
+            <div class="card-body pb-0">
+              <!-- Title -->
+              <p class="card-title text-muted text-uppercase font-small mt-1 mb-3 white-text">{{ article.name }}</p>
+              <!-- Text -->
+              <p class="mb-2 white-text">{{ article.price }} €</p>
+            </div>
+          </div>
+          <!-- Collection card -->
+        </div>
+        <!-- Grid column --> 
+        {% endif %}
+      {% endfor %}
     </div>
-    <!-- End your project here-->
-    {% endblock %}
+    <!-- Grid row -->
+    <div class="row">
+      {% if is_paginated %}
+      
+        {% if page_obj.has_previous %}
+          <a class="btn btn-outline-info btn-sm mb4" href="?page=1">First</a>
+          <a class="btn btn-outline-info btn-sm mb4" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+          {% if page_obj.number == num %}
+            <a class="btn btn-info btn-sm mb4" href="?page={{ num }}">{{ num }}</a>
+          {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}  
+            <a class="btn btn-outline-info btn-sm mb4" href="?page={{ num }}">{{ num }}</a>
+          {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+          <a class="btn btn-outline-info btn-sm mb4" href="?page={{ page_obj.next_page_number }}">Next</a>
+          <a class="btn btn-outline-info btn-sm mb4" href="?page={{ page_obj.paginator.num_pages }}">Previous</a>
+        {% endif %}
+
+      {% endif %}
+    </div>
+  </section>
+  <!--Section: Content-->
+</div>
+{% endblock %}

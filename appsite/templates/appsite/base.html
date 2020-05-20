@@ -40,12 +40,6 @@
         <div class="mask rgba-gradient align-items-center">
           <!-- Content -->
           <div style="min-height: 100vh;" class="container animated fadeIn">
-            
-            {% if messages %}
-              {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}" role="alert">{{ message }}</div>
-              {%  endfor %} 
-            {% endif %}
         
             {% block body %}{% endblock %}
 
