@@ -25,6 +25,7 @@ urlpatterns = [
     path('', include('appsite.urls')),
     path('admin/', admin.site.urls),
     path('blog/', include('blog.urls')),
+    path('terms/', user_views.terms_view, name='terms'),
     path('cart/', appsite_views.cart_view, name='cart'),
     path('cart/<int:id>/update/>', appsite_views.update_cart_view, name='update_cart'),
     path('register/', user_views.register_view, name='register'),
@@ -35,6 +36,7 @@ urlpatterns = [
     path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='users/password_reset_done.html'), name='password_reset_done'),
     path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='users/password_reset_confirm.html'), name='password_reset_confirm'),
     path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='users/password_reset_complete.html'), name='password_reset_complete'),
+    path('register/seller/', user_views.register_seller_view, name='register_seller')
 ]
 
 if settings.DEBUG: #Only on development

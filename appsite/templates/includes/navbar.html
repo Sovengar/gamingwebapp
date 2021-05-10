@@ -41,7 +41,7 @@
                   <img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="avatar image">
               </a>
               <div class="dropdown-menu dropdown-menu-lg-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink-55">
-                <a href="" class="mx-0 my-0 py-1">{{ user.username }}</a>
+                <a href="{% if seller.client_id == client_id %} {% url 'register_seller' %} {% else %} b {% endif %}" class="mx-0 my-0 py-1">Sell a game</a>
                 <hr class="mx-0 my-0 py-0"/>
                 <a class="dropdown-item mx-0 my-0 py-1" href="{% url 'profile' %}">Profile</a>
                 <hr class="mx-0 my-0 py-0"/>

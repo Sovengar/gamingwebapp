@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article, Shopping_cart, Client, Employee
+from .models import Article, Shopping_cart, Key
 
 class Shopping_cartInline(admin.StackedInline):
     model = Shopping_cart.articles.through
@@ -15,5 +15,6 @@ class Shopping_cartAdmin(admin.ModelAdmin):
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Shopping_cart, Shopping_cartAdmin)
-admin.site.register(Client)
-admin.site.register(Employee)
+admin.site.register(Key)
+
+
