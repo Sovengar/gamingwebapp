@@ -11,6 +11,7 @@ class Profile(models.Model):
     def __str__(self):
         return f'{self.user.username}'
 
+    """ Not wortking with AWS S3
     def save(self, *args, **kwargs):
         super(Profile, self).save(*args, **kwargs)
 
@@ -26,6 +27,7 @@ class Profile(models.Model):
         #Avatar photo
         img.thumbnail(size_40)
         img.save(self.avatar.path)
+    """
 
 class Client(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
