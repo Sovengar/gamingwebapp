@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #AWS S3
-    'storages'
+    'storages',
 
     #Third-party apps
     'crispy_forms',
