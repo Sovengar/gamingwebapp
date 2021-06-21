@@ -15,25 +15,51 @@
         <a class="nav-link" href="{% url 'appsite-index' %}">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href=" {% url 'blog-blog' %}">News</a>
+        <a class="nav-link" href="{% url 'blog-blog' %}">Blog</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">FAQ</a>
+        <!-- <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">FAQ</a> -->
+        <a class="nav-link " href="{% url 'faq' %}">FAQ</a>
+      </li>
+      <li>
+        <a class="nav-link" href="{% url 'appsite-partyroom' %}">Party Room</a>
       </li>
       {% if user.is_superuser %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'admin:index' %}">Admin Panel</a>
         </li>
       {% endif %}
-    </ul>
-    <ul class="nav navbar-nav nav-flex-icons ml-auto">
-      <li class="nav-item">
-      <a href="{% url 'cart' %}" class="nav-link waves-effect">
-          <!--<span class="badge red z-depth-3 mr-1">2</span>-->
-          <i id="navbar-static-cart" alt="Cart" class="fas fa-shopping-cart fa-2x"></i>
-          <span class="sr-only">Cart</span>
-      </a>
+      <li>
+        <!-- Search form -->
+        <form class="form-inline mr-auto" action="{% url 'search_results' %}" id="id_search_form" method="GET">
+          <div class="md-form my-0">
+            <input class="form-control" type="text" placeholder="Search.." name="q" id="id_q">
+            <i class="fas fa-search text-white ml-3" aria-hidden="true" id="id_icon_search_form"></i>
+            <script>
+              let input = document.getElementById("id_q");
+              let form = document.getElementById("id_search_form");
+              let icon_input = document.getElementById("id_icon_search_form");
+
+              input.value = "{{query}}"
+              icon_input.addEventListener("click", function () {
+                form.submit();
+              });
+            </script>
+          </div>
+        </form>
       </li>
+    </ul>
+    
+    <ul class="nav navbar-nav nav-flex-icons ml-auto">
+      {% if user.is_authenticated %}
+        <li class="nav-item">
+        <a href="{% url 'cart' %}" class="nav-link waves-effect">
+            <!--<span class="badge red z-depth-3 mr-1">2</span>-->
+            <i id="navbar-static-cart" alt="Cart" class="fas fa-shopping-cart fa-2x"></i>
+            <span class="sr-only">Cart</span>
+        </a>
+        </li>
+      {% endif %}
 
       {% if user.is_authenticated %}
           <li class="nav-item avatar dropdown">
@@ -41,7 +67,15 @@
                   <img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="avatar image">
               </a>
               <div class="dropdown-menu dropdown-menu-lg-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink-55">
-                <a href="{% if seller.client_id == client_id %} {% url 'register_seller' %} {% else %} b {% endif %}" class="mx-0 my-0 py-1">Sell a game</a>
+                {% ifnotequal user.client.seller.client_id user.client.user_id %} 
+                  <a href="{% url 'register_seller' %}" class="mx-0 my-0 py-1">Sell a game</a>
+                {% else %} 
+                  {% ifnotequal user.client.seller.valid True %} 
+                    <a onclick="alert('Your acc is not validated yet');" class="mx-0 my-0 py-1">Sell a game</a>
+                  {% else %} 
+                    <a href="{% url 'sellkey' %}" class="mx-0 my-0 py-1">Sell a game</a>
+                  {% endifnotequal %}  
+                {% endifnotequal %}
                 <hr class="mx-0 my-0 py-0"/>
                 <a class="dropdown-item mx-0 my-0 py-1" href="{% url 'profile' %}">Profile</a>
                 <hr class="mx-0 my-0 py-0"/>

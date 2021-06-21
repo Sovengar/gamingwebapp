@@ -1,6 +1,7 @@
 {% extends "appsite/base.html" %}
 {% load crispy_forms_tags %}
 {% load widget_tweaks %}
+{% load socialaccount %}
 
 {% block title %}
     Gaming webapp
@@ -39,48 +40,20 @@
             <!--Body-->
             <div class="md-form">
               <i class="fas fa-user prefix white-text active"></i>
-              {% if form.username.is_bound %}
-                {% if form.username.errors %}
-                  {% render_field form.username class="form-control is-invalid" %}
-                  {% for error in form.username.errors %}
-                    <div class="invalid-feedback">
-                      {{ error }}
-                    </div>
-                  {% endfor %}
-                {% else %}
-                  {% render_field form.username class="form-control is-valid white-text" %}
-                {% endif %}
-              {% else %}
-                {% render_field form.username class="form-control" %}
-              {% endif %}
-            
+              {{ form.username.label_tag }}
+              {% render_field form.username class="form-control white-text" %}
               {% if form.username.help_text %}
                 <small class="form-text text-muted white-text">{{ form.username.help_text }}</small>
               {% endif %}
-              <label for="form3" class="active">Your name</label>
             </div>
           
             <div class="md-form">
               <i class="fas fa-lock prefix white-text active"></i>
-              {% if form.password.is_bound %}
-                {% if form.password.errors %}
-                  {% render_field form.password class="form-control is-invalid" %}
-                  {% for error in form.password.errors %}
-                    <div class="invalid-feedback">
-                      {{ error }}
-                    </div>
-                  {% endfor %}
-                {% else %}
-                  {% render_field form.password class="form-control is-valid white-text" %}
-                {% endif %}
-              {% else %}
-                {% render_field form.password class="form-control" %}
-              {% endif %}
-            
+              {{ form.password.label_tag }}
+              {% render_field form.password class="form-control white-text" %}
               {% if form.password.help_text %}
                 <small class="form-text text-muted white-text">{{ form.password.help_text }}</small>
               {% endif %}
-              <label for="form3" class="active">Your password</label>
             </div>
 
             <div class="text-center mt-4">
@@ -95,11 +68,13 @@
               <div class="text-center mt4 h6">
                 <a href="{% url 'password_reset' %}">Forgot password?</a>
               </div>
-
-              <!-- 
+              
               <hr class="hr-light mb-3 mt-4">
               <p class="white-text">or sign in with:</p>
               <div class="inline-ul text-center">
+                <a href="{% provider_login_url "google" %}">
+                  <i class="fab fa-google"></i>
+                </a>
                 <a class="p-2 m-2 tw-ic">
                   <i class="fab fa-twitter white-text"></i>
                 </a>
@@ -110,6 +85,7 @@
                   <i class="fas fa-instagram white-text"> </i>
                 </a>
               </div>
+              <!--
                -->
             </div>
         </form>

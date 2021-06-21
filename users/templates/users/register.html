@@ -17,7 +17,7 @@
         <p class="white-text">Register on our page to get access to all of our features</p>
         <p class="white-text">By clicking <em>Sign up</em> you agree to our <a href="{% url 'terms' %}" target="_blank">terms of service</a>
       </h6>
-      <a href="" class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Terms of service</a>
+      <a href="{% url 'terms' %}" target="_blank" class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Terms of service</a>
     </div>
     <!--Grid column-->
 
@@ -45,108 +45,116 @@
           </div>
           {% endif %}
 
-          <form class="md-form" method="POST">
+          <form method="POST">
             
               {% csrf_token %}
               <!--Body-->
               <div class="md-form">
-                <i class="fas fa-user prefix white-text active"></i>
-                {% if form.username.is_bound %}
-                  {% if form.username.errors %}
-                    {% render_field form.username class="form-control is-invalid" %}
-                    {% for error in form.username.errors %}
-                      <div class="invalid-feedback">
-                        {{ error }}
+                
+ 
+                  <i class="fas fa-user prefix white-text active"></i>
+                  {{ form.username.label_tag }}
+                  {% if form.is_bound %}
+                    {% if form.username.errors %}
+                      {% render_field form.username class="form-control is-invalid" %}
+                      <div class="ml-5 invalid-feedback">
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                      {% render_field form.username class="form-control is-valid white-text" %}
+                      <div class="ml-5 valid-feedback">
+                        Looks good!
                       </div>
-                    {% endfor %}
+                    {% endif %}
                   {% else %}
-                    {% render_field form.username class="form-control is-valid white-text" %}
+                    {% render_field form.username class="form-control" %}
                   {% endif %}
-                {% else %}
-                  {% render_field form.username class="form-control" %}
-                {% endif %}
-              
-                {% if form.username.help_text %}
-                  <small class="form-text text-muted white-text">{{ form.username.help_text }}</small>
-                {% endif %}
-                <label for="form3" class="active">Your name</label>
+                  {% if form.username.help_text %}
+                    <small class="form-text text-muted white-text">{{ form.username.help_text }}</small>
+                  {% endif %}
+                
               </div>
+
+              
 
               <div class="md-form">
                 <i class="fas fa-envelope prefix white-text active"></i>
-                {% if form.email.is_bound %}
+                {{ form.email.label_tag }}
+                {% if form.is_bound %}
                   {% if form.email.errors %}
                     {% render_field form.email class="form-control is-invalid" %}
-                    {% for error in form.email.errors %}
-                      <div class="invalid-feedback">
-                        {{ error }}
-                      </div>
-                    {% endfor %}
+                    <div class="ml-5 invalid-feedback">
+                      {% for error in form.email.errors %}
+                          <li>{{ error }}</li>
+                      {% endfor %}
+                  </div>
                   {% else %}
                     {% render_field form.email class="form-control is-valid white-text" %}
+                    <div class="ml-5 valid-feedback">
+                      Looks good!
+                    </div>
                   {% endif %}
                 {% else %}
                   {% render_field form.email class="form-control" %}
                 {% endif %}
-              
                 {% if form.email.help_text %}
                   <small class="form-text text-muted white-text">{{ form.email.help_text }}</small>
-                {% endif %}
-                <label for="form3" class="active">Your Email</label>
+                {% endif %}              
               </div>
             
               <div class="md-form">
                 <i class="fas fa-lock prefix white-text active"></i>
-                {% if form.password1.is_bound %}
+                {{ form.password1.label_tag }}
+                {% if form.is_bound %}
                   {% if form.password1.errors %}
                     {% render_field form.password1 class="form-control is-invalid" %}
-                    {% for error in form.password1.errors %}
-                      <div class="invalid-feedback">
-                        {{ error }}
-                      </div>
-                    {% endfor %}
+                    <div class="ml-5 invalid-feedback">
+                      {% for error in form.password1.errors %}
+                          <li>{{ error }}</li>
+                      {% endfor %}
+                    </div>
                   {% else %}
-                    {% render_field form.password1 class="form-control is-valid white-text" %}
+                    {% render_field form.password1 class="form-control white-text" %}
                   {% endif %}
                 {% else %}
                   {% render_field form.password1 class="form-control" %}
                 {% endif %}
-              
                 {% if form.password1.help_text %}
                   <small class="form-text text-muted white-text">{{ form.password1.help_text }}</small>
                 {% endif %}
-                <label for="form3" class="active">Your password</label>
+                
               </div>
 
               <div class="md-form">
                 <i class="fas fa-lock prefix white-text active"></i>
-                {% if form.password2.is_bound %}
+                {{ form.password2.label_tag }}
+                {% if form.is_bound %}
                   {% if form.password2.errors %}
                     {% render_field form.password2 class="form-control is-invalid" %}
-                    {% for error in form.password2.errors %}
-                      <div class="invalid-feedback">
-                        {{ error }}
-                      </div>
-                    {% endfor %}
+                    <div class="ml-5 invalid-feedback">
+                      {% for error in form.password2.errors %}
+                          <li>{{ error }}</li>
+                      {% endfor %}
+                    </div>
                   {% else %}
-                    {% render_field form.password2 class="form-control is-valid white-text" %}
+                    {% render_field form.password2 class="form-control white-text" %}
                   {% endif %}
                 {% else %}
                   {% render_field form.password2 class="form-control" %}
                 {% endif %}
-              
                 {% if form.password2.help_text %}
                   <small class="form-text text-muted white-text">{{ form.password2.help_text }}</small>
                 {% endif %}
-                <label for="form3" class="active">Your password again</label>
               </div>
 
               <div class="text-center mt-4">
                 <button class="btn btn-info btn-indigo" type="submit">Sign up</button>
-                 <!-- 
                 <p class="white-text">Already have an account?
                   <a href="{% url 'login' %}">Sign In</a>
                 </p>
+                <!--
                 <hr class="hr-light mb-3 mt-4">
                 <div class="inline-ul text-center">
                   <a class="p-2 m-2 tw-ic">

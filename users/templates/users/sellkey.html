@@ -1,0 +1,151 @@
+{% extends "appsite/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Gaming webapp
+{% endblock %}
+
+{% block body %}
+<!--Main Layout-->
+<main class="pb-5">
+  <div class="container-fluid pt-5">
+      <div class="container-fluid mb-5 pt-5 rounded ">
+        <!--Card-->
+        <div class="card pb-5 mx-md-3 bg-white black-text rounded">
+          <div class="card-body">
+            <p class="font-italic font-weight-bolder mb-0">Seller Retail</p>
+            <hr class="hr-black mt-1">
+              <div class="container">
+                <!-- {% include 'includes/alert.html' %} -->
+                <form action='' method="POST" enctype="multipart/form-data">
+                   
+                    {% csrf_token %}
+                    
+                    {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                    {% endfor %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ form.key_value.label_tag }}
+                            {% if form.is_bound %}
+                                {% if form.key_value.errors %}
+                                    {% render_field form.key_value class="form-control is-invalid" %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.key_value.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {% render_field form.key_value class="form-control is-valid" %}
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.key_value class="form-control" %}
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ form.price.label_tag }}
+                            {% if form.is_bound %}
+                                {% if form.price.errors %}
+                                    {% render_field form.price class="form-control is-invalid" %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.price.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {% render_field form.price class="form-control is-valid" %}
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.price class="form-control" %}
+                            {% endif %}
+                            {% if form.price.help_text %}
+                                <small class="form-text text-muted">{{ form.price.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ form.region.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.region.errors %}
+                                {% render_field form.region class="form-control is-invalid" %}
+                                <div class="invalid-feedback">
+                                    {% for error in form.region.errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </div>
+                            {% else %}  
+                                {% render_field form.region class="form-control is-valid" %}
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.region class="form-control" %}
+                        {% endif %}
+                        {% if form.region.help_text %}
+                            <small class="form-text text-muted">{{ form.region.help_text }}</small>
+                        {% endif %}
+                        </div> 
+                    </div>     
+
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            {{ form.game.label_tag }}
+                            {% if form.is_bound %}
+                                {% if form.game.errors %}
+                                    {% render_field form.game class="form-control is-invalid" %}
+                                    <div class="invalid-feedback">
+                                        {% for error in form.game.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    </div>
+                                {% else %}
+                                    {% render_field form.game class="form-control is-valid" %}
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.game class="form-control" %}
+                            {% endif %}
+                            {% if form.game.help_text %}
+                                <small class="form-text text-muted">{{ form.game.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Sell</button>
+                </form>
+
+              </div>
+              <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </div>
+      <!--/Card-->
+      </div>
+  </div>
+{% endblock %}

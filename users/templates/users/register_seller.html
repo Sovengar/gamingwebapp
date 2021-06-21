@@ -17,10 +17,8 @@
             <p class="font-italic font-weight-bolder mb-0">Seller details</p>
             <hr class="hr-black mt-1">
               <div class="container">
-
                 <!-- {% include 'includes/alert.html' %} -->
-                
-                <form method="POST" enctype="multipart/form-data">
+                <form action='' method="POST" enctype="multipart/form-data">
                   {% csrf_token %}
                  
                   {% for hidden_field in form.hidden_fields %}
@@ -37,15 +35,15 @@
 
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="form3" class="active">First Name</label>
-                      {% if u_form.first_name.is_bound %}
+                      {{ u_form.first_name.label_tag }}
+                      {% if u_form.is_bound %}
                         {% if u_form.first_name.errors %}
                           {% render_field u_form.first_name class="form-control is-invalid" %}
-                          {% for error in u_form.first_name.errors %}
-                            <div class="invalid-feedback">
-                              {{ error }}
-                            </div>
-                          {% endfor %}
+                          <div class="invalid-feedback">
+                            {% for error in u_form.first_name.errors %}
+                              <li>{{ error }}</li>
+                            {% endfor %}
+                          </div>
                         {% else %}
                           {% render_field u_form.first_name class="form-control is-valid" %}
                           <div class="valid-feedback">
@@ -56,16 +54,17 @@
                         {% render_field u_form.first_name class="form-control" %}
                       {% endif %}
                     </div>
+
                     <div class="form-group col-md-6">
-                      <label for="form3" class="active">Last Name</label>
-                      {% if u_form.last_name.is_bound %}
+                      {{ u_form.last_name.label_tag }}
+                      {% if u_form.is_bound %}
                         {% if u_form.last_name.errors %}
                           {% render_field u_form.last_name class="form-control is-invalid" %}
-                          {% for error in u_form.last_name.errors %}
-                            <div class="invalid-feedback">
-                              {{ error }}
-                            </div>
-                          {% endfor %}
+                          <div class="invalid-feedback">
+                            {% for error in u_form.last_name.errors %}
+                              <li>{{ error }}</li>
+                            {% endfor %}
+                          </div>
                         {% else %}
                           {% render_field u_form.last_name class="form-control is-valid" %}
                           <div class="valid-feedback">
@@ -78,17 +77,16 @@
                     </div>
                   </div>
 
-
                   <div class="form-group">
-                    <label for="form3" class="active">Date of Birth</label>
-                    {% if s_form.birth_date.is_bound %}
+                    {{ s_form.birth_date.label_tag }}
+                    {% if s_form.is_bound %}
                       {% if s_form.birth_date.errors %}
                         {% render_field s_form.birth_date class="form-control is-invalid" %}
-                        {% for error in s_form.birth_date.errors %}
-                          <div class="invalid-feedback">
-                            {{ error }}
-                          </div>
-                        {% endfor %}
+                        <div class="invalid-feedback">
+                          {% for error in s_form.birth_date.errors %}
+                            <li>{{ error }}</li>
+                          {% endfor %}
+                        </div>
                       {% else %}
                         {% render_field s_form.birth_date class="form-control is-valid" %}
                         <div class="valid-feedback">
@@ -98,56 +96,45 @@
                     {% else %}
                       {% render_field s_form.birth_date class="form-control" %}
                     {% endif %}
-                    
                   </div>
 
                   <div class="form-group">
-                    <label for="inputAddress">Address</label>
-                    {% if s_form.street_and_number.is_bound %}
+                    {{ s_form.street_and_number.label_tag }}
+                    {% if s_form.is_bound %}
                       {% if s_form.street_and_number.errors %}
                         {% render_field s_form.street_and_number class="form-control is-invalid" %}
-                        {% for error in s_form.street_and_number.errors %}
-                          <div class="invalid-feedback">
-                            {{ error }}
-                          </div>
-                        {% endfor %}
+                        <div class="invalid-feedback">
+                          {% for error in s_form.street_and_number.errors %}
+                            <li>{{ error }}</li>
+                          {% endfor %}
+                        </div>
                       {% else %}
                         {% render_field s_form.street_and_number class="form-control is-valid" %}
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
                       {% endif %}
                     {% else %}
                       {% render_field s_form.street_and_number class="form-control" %}
                     {% endif %}
                   </div>
-                  <div class="form-group">
-                    <label for="form3" class="active">Phone number</label>
-                    {% if s_form.phone_number.is_bound %}
-                      {% if s_form.phone_number.errors %}
-                        {% render_field s_form.phone_number class="form-control is-invalid" %}
-                        {% for error in s_form.phone_number.errors %}
-                          <div class="invalid-feedback">
-                            {{ error }}
-                          </div>
-                        {% endfor %}
-                      {% else %}
-                        {% render_field s_form.phone_number class="form-control is-valid" %}
-                      {% endif %}
-                    {% else %}
-                      {% render_field s_form.phone_number class="form-control" %}
-                    {% endif %}
-                  </div>
+                  
                   <div class="form-row">
                     <div class="form-group col-md-6">
-                      <label for="inputCity">City</label>
-                      {% if s_form.city.is_bound %}
+                      {{ s_form.city.label_tag }}
+                      {% if s_form.is_bound %}
                       {% if s_form.city.errors %}
                         {% render_field s_form.city class="form-control is-invalid" %}
-                        {% for error in s_form.city.errors %}
-                          <div class="invalid-feedback">
-                            {{ error }}
-                          </div>
-                        {% endfor %}
+                        <div class="invalid-feedback">
+                          {% for error in s_form.city.errors %}
+                            <li>{{ error }}</li>
+                          {% endfor %}
+                        </div>
                       {% else %}
                         {% render_field s_form.city class="form-control is-valid" %}
+                        <div class="valid-feedback">
+                          Looks good!
+                        </div>
                       {% endif %}
                     {% else %}
                       {% render_field s_form.city class="form-control" %}
@@ -155,17 +142,20 @@
                     </div>
 
                     <div class="form-group col-md-4">
-                      <label for="id_country" class="active">Country</label>
-                      {% if s_form.country.is_bound %}
+                      {{ s_form.country.label_tag }}
+                      {% if s_form.is_bound %}
                         {% if s_form.country.errors %}
                           {% render_field s_form.country class="form-control is-invalid" %}
-                          {% for error in s_form.country.errors %}
-                            <div class="invalid-feedback">
-                              {{ error }}
-                            </div>
-                          {% endfor %}
+                          <div class="invalid-feedback">
+                            {% for error in s_form.country.errors %}
+                              <li>{{ error }}</li>
+                            {% endfor %}
+                          </div>
                         {% else %}
                           {% render_field s_form.country class="form-control is-valid" %}
+                          <div class="valid-feedback">
+                            Looks good!
+                          </div>
                         {% endif %}
                       {% else %}
                         {% render_field s_form.country class="form-control" %}
@@ -173,17 +163,20 @@
                     </div>
 
                     <div class="form-group col-md-2">
-                      <label for="form3" class="active">Zip</label>
-                      {% if s_form.zip.is_bound %}
+                      {{ s_form.zip.label_tag }}
+                      {% if s_form.is_bound %}
                         {% if s_form.zip.errors %}
                           {% render_field s_form.zip class="form-control is-invalid" %}
-                          {% for error in s_form.zip.errors %}
-                            <div class="invalid-feedback">
-                              {{ error }}
-                            </div>
-                          {% endfor %}
+                          <div class="invalid-feedback">
+                            {% for error in s_form.zip.errors %}
+                              <li>{{ error }}</li>
+                            {% endfor %}
+                          </div>
                         {% else %}
                           {% render_field s_form.zip class="form-control is-valid" %}
+                          <div class="valid-feedback">
+                            Looks good!
+                          </div>
                         {% endif %}
                       {% else %}
                         {% render_field s_form.zip class="form-control" %}
@@ -191,43 +184,74 @@
                     </div>
                   </div>
 
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                      </div>
-                      <div class="custom-file">
-                        {% if p_form.image.is_bound %}
-                          {% if p_form.image.errors %}
-                            {% render_field p_form.image class="form-control is-invalid" %}
-                            {% for error in p_form.image.errors %}
-                              <div class="invalid-feedback">
-                                {{ error }}
-                              </div>
+                  <div class="form-row">
+
+                    <div class="form-group col-md-5">
+                      {{ s_form.phone_number.label_tag }}
+                      {% if s_form.is_bound %}
+                        {% if s_form.phone_number.errors %}
+                          {% render_field s_form.phone_number class="form-control is-invalid" %}
+                          <div class="invalid-feedback">
+                            {% for error in s_form.phone_number.errors %}
+                              <li>{{ error }}</li>
                             {% endfor %}
-                          {% else %}
-                            {% render_field p_form.image class="form-control is-valid" %}
-                          {% endif %}
+                          </div>
                         {% else %}
-                          {% render_field p_form.image class="form-control" %}
+                          {% render_field s_form.phone_number class="form-control is-valid" %}
+                          <div class="valid-feedback">
+                            Looks good!
+                          </div>
                         {% endif %}
-                        <input type="file" class="custom-file-input" id="inputGroupFile01">
-                        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                      {% else %}
+                        {% render_field s_form.phone_number class="form-control" %}
+                      {% endif %}
+                    </div>
+
+                    <div class="form-group col-md-7">
+                      {% if s_form.authenticator_img.help_text %}
+                        <small class="form-text text-muted grey-text mt-1 mb-1">{{ s_form.authenticator_img.help_text }}</small>
+                      {% endif %}
+                      <div class="input-group pt-1">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                          {% if s_form.is_bound %}
+                            {% if s_form.authenticator_img.errors %}
+                              {% render_field s_form.authenticator_img class="custom-file-input is-invalid" %}
+                              <div class="invalid-feedback">
+                                {% for error in s_form.authenticator_img.errors %}
+                                  <li>{{ error }}</li>
+                                {% endfor %}
+                              </div>
+                            {% else %}
+                              {% render_field s_form.authenticator_img class="custom-file-input is-valid" %}
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            {% endif %}
+                          {% else %}
+                            {% render_field s_form.authenticator_img class="custom-file-input" %}
+                          {% endif %}
+                          <label class="custom-file-label" for="inputGroupFile01">Choose a file</label>
+                        </div>
                       </div>
+                      
                     </div>
                   </div>
-               
+
+                  
 
                   <div class="form-group">
                     <div class="form-check">
-                      {% if s_form.terms.is_bound %}
+                      {% if s_form.is_bound %}
                         {% if s_form.terms.errors %}
                           {% render_field s_form.terms class=" is-invalid form-check-input" %}
-                          {% for error in s_form.terms.errors %}
                             <div class="invalid-feedback">
-                              {{ error }}
+                              {% for error in s_form.terms.errors %}
+                                <li>{{ error }}</li>
+                              {% endfor %}
                             </div>
-                          {% endfor %}
                         {% else %}
                           {% render_field s_form.terms class=" is-valid form-check-input" %}
                         {% endif %}
@@ -241,6 +265,7 @@
                   </div>
                   <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+
               </div>
               <!--Grid column-->
           </div>

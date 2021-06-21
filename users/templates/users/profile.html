@@ -101,6 +101,9 @@
                                 {% endif %}
                               </div>
 
+                              <h4 class="h4-responsive">Money: {{ user.client.money }} €</h4>
+                              <a href="{% url 'keys' %}" class="btn btn-primary"><h4 class="h4-responsive">Keys</h4></a>
+
                               <div class="text-center mt-4">
                                 <hr>
                                 <div><a href="{% url 'password_reset' %}">Forgot password?</a></div>
@@ -109,6 +112,53 @@
                                 </div> 
                               </div>
                             </form>
+                            {% ifequal user.client.seller.client_id user.client.user_id %} 
+                              <table class="table table-bordered border-dark">
+                                <thead>
+                                  <tr>
+                                    <th scope="col" colspan="2" class="text-center table-primary table-bordered border-dark"><h2 class="h2-responsive">Seller section</h2></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row" class="table-info table-bordered border-dark">Date of Birth</th>
+                                    <td class="table-info table-bordered border-dark">{{ user.client.seller.birth_date }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row" class="table-info table-bordered border-dark">City</th>
+                                    <td class="table-info table-bordered border-dark">{{ user.client.seller.city }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row" class="table-info table-bordered border-dark">Country</th>
+                                    <td colspan="2" class="table-info table-bordered border-dark">{{ user.client.seller.country }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row" class="table-info table-bordered border-dark">Street</th>
+                                    <td colspan="2" class="table-info table-bordered border-dark">{{ user.client.seller.street_and_number }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row" class="table-info table-bordered border-dark">Zip</th>
+                                    <td colspan="2" class="table-info table-bordered border-dark">{{ user.client.seller.zip }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row" class="table-info table-bordered border-dark">Phone number</th>
+                                    <td colspan="2" class="table-info table-bordered border-dark">{{ user.client.seller.phone_number }}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row" class="table-info table-bordered border-dark">Rating</th>
+                                    <td colspan="2" class="table-info table-bordered border-dark">{% include 'includes/rating_stars.html' with object=user.client.seller %}</td>
+                                  </tr>
+                                  <tr>
+                                    <th scope="row" class="table-info table-bordered border-dark">Account status</th>
+                                    {% if user.client.seller.valid %} 
+                                      <td colspan="2" class="table-info table-bordered border-dark">You can sell</td>
+                                    {% else %}
+                                      <td colspan="2" class="table-info table-bordered border-dark">You can not sell yet</td>
+                                    {% endif %}
+                                  </tr>
+                                </tbody>
+                              </table>
+                            {% endifequal %}
                           </div>
                           <!--Grid column-->
                       </div>

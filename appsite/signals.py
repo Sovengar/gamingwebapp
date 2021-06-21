@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save, pre_save
 from django.contrib.auth.models import User
-from .models import Article, Shopping_cart, Key
+from .models import Game, Shopping_cart, Key
 from users.models import  Employee, Client, Seller
 from django.dispatch import receiver 
 
@@ -21,8 +21,12 @@ def save_cart(sender, instance, **kwargs):
     sc.save()
 
 @receiver(post_save, sender=Key)
-def update_article(sender, instance, **kwargs):
-    key = Key.objects.get(pk=instance.id)
-    article = Article.objects.get(pk=key.article_id) 
-    article.stock = article.stock + 1
-    article.save()
+def update_game(sender, instance, created, **kwargs):
+    game = Game.objects.get(pk=instance.game_id)
+    if created:
+        game.stock += 1
+        try:
+            game.lowest_price = Key.objects.filter(game_id=game.id).filter(used=False).order_by('price').first().price
+        except:
+            game.lowest_price = None
+    game.save()

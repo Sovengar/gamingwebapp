@@ -8,7 +8,7 @@
 {% block body %}
 
 <!--Main Layout-->
-<main>
+<main class="py-5">
   <div class="container-fluid pt-5">
       <div class="container-fluid mb-5 pt-5 rounded ">
 
@@ -33,7 +33,7 @@
                                 <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                               </div>
                               <h2><a class="article-title" href="{% url 'blog-post_detail' post.id %}">{{ post.title }}</a></h2>
-                              <p class="article-content white-text">{{ post.content }}</p>
+                              <p class="article-content white-text">{{ post.content|truncatechars:200 }}</p>
                             </div>
                           </article>
                           {% endfor %}
