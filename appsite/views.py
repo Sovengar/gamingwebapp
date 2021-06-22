@@ -42,7 +42,7 @@ def get_game_queryset(query=None):
         for genre in genres:
             if q.upper()==genre.name.upper():
                 aux=True
-                genre = Genre.objects.filter(name=q.capitalize())
+                genre = Genre.objects.filter(name=q.capitalize()).first()
 
     for q in queries:
         if aux==True:
