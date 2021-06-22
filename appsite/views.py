@@ -37,6 +37,7 @@ def get_game_queryset(query=None):
     queries = query.split(" ")
     genres = Genre.objects.all()
     aux=False
+    genre = None
 
     for q in queries:
         for genre in genres:
