@@ -44,7 +44,7 @@
 
             <!--Card image-->
             <div class="view overlay"> 
-              <img class="rounded-circle card-img-top w-25 m-2 d-flex float-left" src="{{ lower_key.seller.client.user.profile.avatar.url }}"  alt="avatar image">
+              <img class="rounded-circle card-img-top w-25 m-2 d-flex float-left" src="{% adjust lower_key.seller.client.user.profile.image 'fit' width=150 height=70 %}"  alt="avatar image">
               <h4 class=" h4-responsive mt-2">{{ lower_key.seller.client.user.username }}</h4>
               {% include 'includes/rating_stars.html' with object=lower_key.seller %}
             </div>
