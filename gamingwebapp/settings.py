@@ -196,6 +196,16 @@ AWS_STORAGE_BUCKET_NAME=os.environ.get('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_FILE_OVERWRITE = False #If 2 users upload 2 files equal named wont overwrite
 AWS_DEFAULT_ACL = None 
 
+#boto3
+AWS_S3_REGION_NAME = 'eu-west-3' #change to your region
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+
+"""
+#boto
+AWS_S3_HOST = 'us-east-2' #change to your region
+S3_USE_SIGV4 = True
+"""
+
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 django_heroku.settings(locals())
