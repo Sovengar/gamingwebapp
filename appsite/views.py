@@ -42,18 +42,17 @@ def get_game_queryset(query=None):
         for genre in genres:
             if q.upper()==genre.name.upper():
                 aux=True
-    
+
     for q in queries:
         if aux==True:
-            for genre in genres:
-                games = Game.objects.filter(Q(genres=genre)).distinct()
+                games = Game.objects.filter(stock__gte=1).filter(Q(genres=q.capitalize())).distinct()
                 for game in games:
                     queryset.append(game)
         else:
             games = Game.objects.filter(stock__gte=1).filter(Q(name__icontains=q)).distinct()
             for game in games:
                 queryset.append(game)
-            
+    
     return list(set(queryset))
 
 #View to show the games matching the query
