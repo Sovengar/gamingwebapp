@@ -46,7 +46,7 @@ def get_game_queryset(query=None):
 
     for q in queries:
         if aux==True:
-            games = Game.objects.filter(stock__gte=1).filter(Q(genres=genre)).distinct()
+            games = Game.objects.filter(stock__gte=1).filter(genres=genre).distinct()
             for game in games:
                 queryset.append(game)
         else:
