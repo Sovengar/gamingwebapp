@@ -64,7 +64,7 @@
       {% if user.is_authenticated %}
           <li class="nav-item avatar dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <img src="{{ user.profile.avatar.url }}" class="rounded-circle" alt="avatar image">
+                  <img src="{{ user.profile.image.url }}" class="rounded-circle" alt="avatar image">
               </a>
               <div class="dropdown-menu dropdown-menu-lg-right dropdown-dark" aria-labelledby="navbarDropdownMenuLink-55">
                 {% ifnotequal user.client.seller.client_id user.client.user_id %} 
