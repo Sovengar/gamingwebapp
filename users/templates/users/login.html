@@ -1,0 +1,99 @@
+{% extends "appsite/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% load socialaccount %}
+
+{% block title %}
+    Gaming webapp
+{% endblock %}
+
+{% block body %}
+<div class="pt-5">
+  <!--Grid column-->
+  <div class="container col-md-6 col-xl-5 mb-4 pt-5">
+    {% include 'includes/alert.html' %}
+    <!--Form-->
+    <div class="card wow fadeInRight" data-wow-delay="0.3s">
+      <div class="card-body">
+        <!--Header-->
+        <div class="text-center">
+          <h3 class="white-text">
+            <i class="fas fa-user white-text"></i> Sign In</h3>
+          <hr class="hr-light">
+        </div>
+
+        {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+        {% endfor %}
+        
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+          {% for error in form.non_field_errors %}
+            {{ error }}
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <form class="md-form" method="POST">
+          
+            {% csrf_token %}
+            <!--Body-->
+            <div class="md-form">
+              <i class="fas fa-user prefix white-text active"></i>
+              {{ form.username.label_tag }}
+              {% render_field form.username class="form-control white-text" %}
+              {% if form.username.help_text %}
+                <small class="form-text text-muted white-text">{{ form.username.help_text }}</small>
+              {% endif %}
+            </div>
+          
+            <div class="md-form">
+              <i class="fas fa-lock prefix white-text active"></i>
+              {{ form.password.label_tag }}
+              {% render_field form.password class="form-control white-text" %}
+              {% if form.password.help_text %}
+                <small class="form-text text-muted white-text">{{ form.password.help_text }}</small>
+              {% endif %}
+            </div>
+
+            <div class="text-center mt-4">
+              <button class="btn btn-info btn-indigo" type="submit">Sign In</button>
+
+              
+
+              <div class="text-center mt4 white-text py-1">Not a member?
+                <a href="{% url 'register' %}">Sign up</a>
+              </div>
+
+              <div class="text-center mt4 h6">
+                <a href="{% url 'password_reset' %}">Forgot password?</a>
+              </div>
+              
+              <hr class="hr-light mb-3 mt-4">
+              <p class="white-text">or sign in with:</p>
+              <div class="inline-ul text-center">
+                <a href="{% provider_login_url "google" %}">
+                  <i class="fab fa-google"></i>
+                </a>
+                <a class="p-2 m-2 tw-ic">
+                  <i class="fab fa-twitter white-text"></i>
+                </a>
+                <a class="p-2 m-2 li-ic">
+                  <i class="fab fa-linkedin-in white-text"> </i>
+                </a>
+                <a class="p-2 m-2 ins-ic">
+                  <i class="fas fa-instagram white-text"> </i>
+                </a>
+              </div>
+              <!--
+               -->
+            </div>
+        </form>
+        <!-- Default form login -->
+      </div>
+    </div>
+    <!--/.Form-->
+  </div>
+  <!--Grid column-->
+</div>
+{% endblock %}

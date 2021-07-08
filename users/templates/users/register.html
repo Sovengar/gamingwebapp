@@ -1,0 +1,184 @@
+{% extends "appsite/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% load socialaccount %}
+
+{% block title %}
+    Gaming webapp
+{% endblock %}
+
+{% block body %}
+<div class="pt-5">
+  <div class="row">
+    <!--Grid column-->
+    <div class="col-md-6 mb-5 mt-md-0 mt-5 white-text text-center text-md-left py-5">
+      <h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Sign up right now! </h1>
+      <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+      <h6 class="mb-3 wow fadeInLeft" data-wow-delay="0.3s">
+        <p class="white-text">Register on our page to get access to all of our features</p>
+        <p class="white-text">By clicking <em>Sign up</em> you agree to our <a href="{% url 'terms' %}" target="_blank">terms of service</a>
+      </h6>
+      <a href="{% url 'terms' %}" target="_blank" class="btn btn-outline-white wow fadeInLeft" data-wow-delay="0.3s">Terms of service</a>
+    </div>
+    <!--Grid column-->
+
+    <!--Grid column-->
+    <div class="col-md-6 col-xl-5 mb-4 pt-5">
+      <!--Form-->
+      <div class="card wow fadeInRight" data-wow-delay="0.3s">
+        <div class="card-body">
+          <!--Header-->
+          <div class="text-center">
+            <h3 class="white-text">
+              <i class="fas fa-user white-text"></i> Sign Up</h3>
+            <hr class="hr-light">
+          </div>
+
+          {% for hidden_field in form.hidden_fields %}
+          {{ hidden_field }}
+          {% endfor %}
+          
+          {% if form.non_field_errors %}
+          <div class="alert alert-danger" role="alert">
+            {% for error in form.non_field_errors %}
+              {{ error }}
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <form method="POST">
+            
+              {% csrf_token %}
+              <!--Body-->
+              <div class="md-form">
+                
+ 
+                  <i class="fas fa-user prefix white-text active"></i>
+                  {{ form.username.label_tag }}
+                  {% if form.is_bound %}
+                    {% if form.username.errors %}
+                      {% render_field form.username class="form-control is-invalid" %}
+                      <div class="ml-5 invalid-feedback">
+                        {% for error in form.username.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                      {% render_field form.username class="form-control is-valid white-text" %}
+                      <div class="ml-5 valid-feedback">
+                        Looks good!
+                      </div>
+                    {% endif %}
+                  {% else %}
+                    {% render_field form.username class="form-control" %}
+                  {% endif %}
+                  {% if form.username.help_text %}
+                    <small class="form-text text-muted white-text">{{ form.username.help_text }}</small>
+                  {% endif %}
+                
+              </div>
+
+              
+
+              <div class="md-form">
+                <i class="fas fa-envelope prefix white-text active"></i>
+                {{ form.email.label_tag }}
+                {% if form.is_bound %}
+                  {% if form.email.errors %}
+                    {% render_field form.email class="form-control is-invalid" %}
+                    <div class="ml-5 invalid-feedback">
+                      {% for error in form.email.errors %}
+                          <li>{{ error }}</li>
+                      {% endfor %}
+                  </div>
+                  {% else %}
+                    {% render_field form.email class="form-control is-valid white-text" %}
+                    <div class="ml-5 valid-feedback">
+                      Looks good!
+                    </div>
+                  {% endif %}
+                {% else %}
+                  {% render_field form.email class="form-control" %}
+                {% endif %}
+                {% if form.email.help_text %}
+                  <small class="form-text text-muted white-text">{{ form.email.help_text }}</small>
+                {% endif %}              
+              </div>
+            
+              <div class="md-form">
+                <i class="fas fa-lock prefix white-text active"></i>
+                {{ form.password1.label_tag }}
+                {% if form.is_bound %}
+                  {% if form.password1.errors %}
+                    {% render_field form.password1 class="form-control is-invalid" %}
+                    <div class="ml-5 invalid-feedback">
+                      {% for error in form.password1.errors %}
+                          <li>{{ error }}</li>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {% render_field form.password1 class="form-control white-text" %}
+                  {% endif %}
+                {% else %}
+                  {% render_field form.password1 class="form-control" %}
+                {% endif %}
+                {% if form.password1.help_text %}
+                  <small class="form-text text-muted white-text">{{ form.password1.help_text }}</small>
+                {% endif %}
+                
+              </div>
+
+              <div class="md-form">
+                <i class="fas fa-lock prefix white-text active"></i>
+                {{ form.password2.label_tag }}
+                {% if form.is_bound %}
+                  {% if form.password2.errors %}
+                    {% render_field form.password2 class="form-control is-invalid" %}
+                    <div class="ml-5 invalid-feedback">
+                      {% for error in form.password2.errors %}
+                          <li>{{ error }}</li>
+                      {% endfor %}
+                    </div>
+                  {% else %}
+                    {% render_field form.password2 class="form-control white-text" %}
+                  {% endif %}
+                {% else %}
+                  {% render_field form.password2 class="form-control" %}
+                {% endif %}
+                {% if form.password2.help_text %}
+                  <small class="form-text text-muted white-text">{{ form.password2.help_text }}</small>
+                {% endif %}
+              </div>
+
+              <div class="text-center mt-4">
+                <button class="btn btn-info btn-indigo" type="submit">Sign up</button>
+                <p class="white-text">Already have an account?
+                  <a href="{% url 'login' %}">Sign In</a>
+                </p>
+                <hr class="hr-light mb-3 mt-4">
+                <p class="white-text">or sign in with:</p>
+                <div class="inline-ul text-center">
+                  <a href="{% provider_login_url "google" %}">
+                    <i class="fab fa-google"></i>
+                  </a>
+                  <a class="p-2 m-2 tw-ic">
+                    <i class="fab fa-twitter white-text"></i>
+                  </a>
+                  <a class="p-2 m-2 li-ic">
+                    <i class="fab fa-linkedin-in white-text"> </i>
+                  </a>
+                  <a class="p-2 m-2 ins-ic">
+                    <i class="fas fa-instagram white-text"> </i>
+                  </a>
+                </div>
+              </div>
+          </form>
+          <!-- Default form login -->
+        </div>
+      </div>
+      <!--/.Form-->
+    </div>
+    <!--Grid column-->
+  </div>
+</div>
+{% endblock %}

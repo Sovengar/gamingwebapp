@@ -1,0 +1,72 @@
+{% extends "appsite/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Gaming webapp
+{% endblock %}
+
+{% block body %}
+<main class="py-5 mb-5">
+  <!--Grid column-->
+  <div class="container col-md-6 col-xl-5 mb-4 pt-5">
+    <!--Form-->
+    <div class="card wow fadeInRight" data-wow-delay="0.3s">
+      <div class="card-body">
+        <!--Header-->
+        <div class="text-center">
+          <h3 class="white-text">
+            <i class="fas fa-user white-text"></i> Blog Post</h3>
+          <hr class="hr-light">
+        </div>
+
+        {% for hidden_field in form.hidden_fields %}
+        {{ hidden_field }}
+        {% endfor %}
+        
+        {% if form.non_field_errors %}
+        <div class="alert alert-danger" role="alert">
+          {% for error in form.non_field_errors %}
+            {{ error }}
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <form class="md-form" method="POST" enctype="multipart/form-data">
+          
+            {% csrf_token %}
+            <!--Body-->
+            <div class="md-form">
+              {{ form.title.label_tag }}
+              {% render_field form.title class="form-control white-text" %}
+            </div>
+            <div class="md-form pb-1">
+              {{ form.content.label_tag }}
+            </div>
+            <div class="md-form">
+              {% render_field form.content class="form-control white-text mt-5" %} 
+            </div>
+            <div class="md-form pb-1">
+              {{ form.genre.label_tag }}
+            </div>
+            <div class="md-form">
+              {% render_field form.genre class="form-control mt-5" %} 
+            </div>
+            <div class="md-form pb-1">
+              {{ form.img_prepost.label_tag }}
+            </div>
+            <div class="md-form">
+              {% render_field form.img_prepost class="form-control white-text mt-5" %} 
+            </div>
+            <div class="text-center mt-4">
+              <button class="btn btn-info btn-indigo" type="submit">Post</button>
+            </div>
+        </form>
+        <!-- Default form login -->
+      </div>
+    </div>
+    <!--/.Form-->
+  </div>
+  <!--Grid column-->
+</main>
+{% endblock %}

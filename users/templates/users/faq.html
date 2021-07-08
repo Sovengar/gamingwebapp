@@ -1,0 +1,118 @@
+{% extends "appsite/base.html" %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Gaming webapp
+{% endblock %}
+
+{% block body %}
+<!--Main Layout-->
+<main class="pb-5">
+  <div class="container-fluid pt-5">
+      <div class="container-fluid mb-5 pt-5 rounded ">
+        <!--Card-->
+        <div class="card pb-5 mx-md-3 rounded">
+          <div class="card-body">
+
+            <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+
+                <!-- Accordion card -->
+                <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingOne1">
+                    <a data-toggle="collapse" data-parent="#accordionEx" href="#collapseOne1" aria-expanded="true" aria-controls="collapseOne1">
+                    <h5 class="mb-0 font-weight-bold">
+                        How works this page?
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                    </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseOne1" class="collapse show" role="tabpanel" aria-labelledby="headingOne1" data-parent="#accordionEx">
+                    <div class="card-body grey-text">
+                        <p>Our webpage is a place where people can buy/sell keys, simply as that.</p>
+                        <p class="font-italic white-text mb-0">Is this legal?</p>
+                        <p>Totally, once you own a key you can do whatever you want to with it.</p>
+                        <p class="font-italic white-text mb-0">How is this profitable?</p>
+                        <p>Our page takes a fee of the product, the seller probably bought bundles of keys with a proper discount or from countrys with lower taxes so he gets a slice of the cake too, meanwhile the client gets a juicy cheap game</p>
+                    </div>
+                </div>
+                </div>
+                <!-- Accordion card -->
+            
+                <!-- Accordion card -->
+                <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo2">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+                    <h5 class="mb-0">
+                        How can I buy a digital product on GAMINGWEBAPP?
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                    </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo2" class="collapse" role="tabpanel" aria-labelledby="headingTwo2" data-parent="#accordionEx">
+                    <div class="card-body grey-text">
+                        <p>First of all, you need to create an account on this page, keep reading.</p>
+                        <p class="font-italic white-text mb-0">How do I search for digital products on GAMINGWEBAPP?</p>
+                        <p>First, take a look on what you want, if you know what game you want to buy, you can specifically search it on the search bar or scrolling on the home page.</p>
+                        <p class="font-italic white-text mb-0">I found what I want to buy, what do I do now?</p>
+                        <p>Now that you’ve found what you were looking for, you should check the details of the product to make sure that you're getting the right version for the right platform.
+                            For now we only offer keys for steam on EU, so you should have that in mind beforing buying.
+                        </p>
+                        <p class="font-italic white-text mb-0">All set? Awesome! Now, just add the product to your cart.</p>
+                        <p>You can either pick the Selected Offer (just click on the blue "Add to cart" button) or scroll down for a list of available offers where you can choose the best one by clicking the 
+                            blue cart button right next to it.  
+                        </p>
+                        <p>Each seller has a few details that you can check about him as well like their rating, the more rating he/she has the more trustworthy</p>
+                        <p>Once you've decided on the offer, you can either continue shopping or go to checkout to complete the purchase.</p>
+                        <p class="font-italic white-text mb-0">Can I now when the delivery arrives?</p>
+                        <p>Since we are working with virtual data, you'll get the digital product you bought as soon as your order is processed and completed.</p>
+                        <p class="font-italic white-text mb-0">I’ve added the products to my cart, how do I complete my purchase?</p>
+                        <p>You're almost there! Time to check out your cart's contents if you added all that you needed. Simply click on the shopping cart you see right above all.</p>
+                        <p>You will see the items you added and their quantity (for now limited to 1) and the seller(s) you're buying the product(s) from</p>
+                        <p>If everything is fine, you can checkout and complete de payment. All you need is wait for the payment to be processed. 
+                            This may take from a few seconds to a couple of minutes. Once it's done, you will get the products you bought as soon as possible!</p>
+                        <p class="font-italic white-text mb-0">I paid for my order, is there anything else I should do?</p>
+                        <p>When the payment finish your purchase, you'll be redirected to your profile, where you can click on 'Keys' to see your keys.</p>
+                    </div>
+                </div>
+            </div>
+                <!-- Accordion card -->
+            
+                <!-- Accordion card -->
+                <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingThree3">
+                    <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree3"
+                    aria-expanded="false" aria-controls="collapseThree3">
+                    <h5 class="mb-0">
+                        I didn't receive any or every product in my order. What should I do?
+                        <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                    </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3"
+                    data-parent="#accordionEx">
+                    <div class="card-body grey-text">
+                        <p>
+                            You’ve made a purchase, but an item is missing? If that’s the case, the seller most likely ran out of keys right during the finalization of your order, which is why you received only a part of it.
+                            Worry not - If this happens, we will talk with the seller 
+                            Contact us so we are aware of your problem on gamingwebapp@gmail.com
+                        </p>
+                    </div>
+                </div>
+                </div>
+                <!-- Accordion card -->
+            
+            </div>
+            <!--/.Accordion wrapper-->
+          </div>
+        </div>
+      </div>
+  </div>
+{% endblock %}

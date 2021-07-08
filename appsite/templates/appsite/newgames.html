@@ -1,0 +1,48 @@
+{% extends "appsite/base.html" %}
+{% load static %}
+
+{% block title %}
+    Gaming webapp
+{% endblock %}
+
+{% block body %}  
+<div class="container pt-5 mt-5 pb-5">
+  <!--Section: Content-->
+  <section class="dark-grey-text text-center">
+    
+    <!-- Section heading -->
+    <h3 class="font-weight-bold white-text mb-4 pb-2">New releases</h3>
+    <!-- Section description -->
+    
+    <!-- Grid row -->
+    <div class="row">
+      {% for game in games %}
+            <!-- Grid column -->
+            <div class="col-lg-3 col-md-6 mb-4">
+              <!-- Collection card -->
+              <div class="card rounded collection-card z-depth-1-half">
+                <!-- Card image -->
+                <a class="mr-2" href="{% url 'appsite-game_detail' game.id %}">
+                  <img style="height:25vh;" class="card-img-top rounded pl-2 pt-2" src="{{ game.image.url }}" alt="Card image cap">
+                </a>
+                <!-- Card content -->
+                <div class="card-body pb-0">
+                  <!-- Title -->
+                  <p class="card-title text-muted text-uppercase font-small mt-1 mb-3 white-text">{{ game.name }}</p>
+                  <!-- Text -->
+                  <p class="mb-2 white-text">{{ game.lowest_price }} €</p>
+                </div>
+              </div>
+              <!-- Collection card -->
+            </div>
+            <!-- Grid column --> 
+      {% endfor %}
+    </div>
+    <!-- Grid row -->
+    <div class="row">
+      {% include 'includes/paginator.html' %}
+    </div>
+  </section>
+  <!--Section: Content-->
+</div>
+{% endblock %}
