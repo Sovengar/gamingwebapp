@@ -1,13 +1,12 @@
 # WEBAPP WITH PYTHON
+https://gamingwebapp.herokuapp.com
 
 ## Stack
 ```sh
-Backend: Django con python
-Frontend: HTML5, CSS3, ES6, MDB4
+Backend: Python, Django
+Frontend: HTML5, CSS3, JS, MDB4
 Testing: Selenium, Travis 
-BBDD: PostGreSQL
-Deploy: Heroku
+BBDD: PostGreSQL, SQLite
+Deploy: Heroku, AWS S3
 Version control: Git
-
-Webpack, API REST
 ```
